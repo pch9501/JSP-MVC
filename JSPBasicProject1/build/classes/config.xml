@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	Connection
+ -->
+<!DOCTYPE configuration  
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- 
+	default: 무조건 한 번만 사용
+	?: 한 번을 사용하거나, 사용하지않는다.
+	*: 여러번 사용이 가능하다, 사용하지않아도 된다.
+	+: 여러번 사용이 가능하다, 한 번 이상 사용
+	|: 선택 => ex) tr (th|td)*
+	
+	<html>
+	  <head>
+	  </head>
+	  <body>
+	  </body>
+	</html>
+ -->
+<configuration>
+	<typeAliases>
+		<!-- VO등록과정 -->
+		<typeAlias type="com.sist.dao.MovieVO" alias="MovieVO"/>
+		<typeAlias type="com.sist.dao.MusicVO" alias="MusicVO"/>
+	</typeAliases>
+	<environments default="development">
+	  <environment id="development">
+	    <!-- 
+	    	transactionManager,dataSource => 반드시 한 번 사용
+	     -->
+	     <transactionManager type="JDBC"/><!-- commit과 rollback -->
+	     <dataSource type="POOLED"><!-- UNPOOLED: -->
+	       <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+	       <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
+	       <property name="username" value="hr"/>
+	       <property name="password" value="happy"/>
+	       <!-- 
+	       		maxActive=8 // 둘 다 디폴트가 8이다.
+	       		maxIdle=8
+	        -->
+	     </dataSource>
+	  </environment>
+	</environments>
+	<mappers>
+		<mapper resource="com/sist/dao/movie-mapper.xml"/>
+	</mappers>
+</configuration>
